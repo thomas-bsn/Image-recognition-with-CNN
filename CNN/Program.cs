@@ -1,5 +1,5 @@
 ﻿using System;
-using Image_recognition_with_CNN.ImageProcessing;
+using CNN.ImageProcessing;
 
 
 if (args.Length == 0)

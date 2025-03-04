@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Drawing.Imaging;
 
-namespace Image_recognition_with_CNN.ImageProcessing;
+namespace CNN.ImageProcessing;
 
 public class ImageLoader
 {
@@ -28,6 +28,7 @@ public class ImageLoader
                 using (var resizedImage = PictureResize(rgbImage))
                     _image = PixelNormalisation(resizedImage);
             }
+            Console.WriteLine($"Image chargée : {Path.GetFileName(path)}");
         }
         else
         {

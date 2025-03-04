@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Image recognition with CNN", "Image recognition with CNN\Image recognition with CNN.csproj", "{1135170D-8038-4D68-815E-775C8E58FAE2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CNN", "CNN\CNN.csproj", "{1135170D-8038-4D68-815E-775C8E58FAE2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
