@@ -32,7 +32,7 @@ public class ImageLoader
         using (var rgbImage = Preprocessor.ConvertToRgb(_image))
         using (var resizedImage = Preprocessor.Resize(rgbImage))
         {
-            var matrix = Preprocessor.Normalize(resizedImage);
+            var matrix = Preprocessor.Normalize(resizedImage, centerAroundZero: true);
             Console.WriteLine($"Matrice crée pour l'image : {_imageName}");
             return matrix;
         }
