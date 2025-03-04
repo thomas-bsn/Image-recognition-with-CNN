@@ -1,0 +1,17 @@
+# 🔹 Ignorer les fichiers de build de .NET
+bin/
+obj/
+
+# 🔹 Ignorer les fichiers Rider / IntelliJ
+.idea/
+
+# 🔹 Ignorer les dépendances NuGet
+*.nuget/
+packages/
+project.lock.json
+project.assets.json
+global.json
+
+# 🔹 Ignorer les fichiers de config locaux
+appsettings.*.json
+secrets.json
