@@ -1,0 +1,31 @@
+# Ignore les fichiers binaires et builds
+bin/
+obj/
+*.exe
+*.dll
+*.pdb
+*.cache
+
+# Ignore les fichiers générés par Visual Studio
+.vscode/
+../.idea/
+*.user
+*.suo
+*.ncb
+*.log
+*.sdf
+*.sln.cache
+*.csproj.user
+*.VC.db
+*.opendb
+
+# Ignore les dépendances NuGet
+*.nuget/
+packages/
+project.lock.json
+project.assets.json
+global.json
+
+# Ignore les fichiers de configuration locaux
+appsettings.*.json
+secrets.json
