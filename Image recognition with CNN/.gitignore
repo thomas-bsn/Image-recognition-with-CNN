@@ -8,7 +8,7 @@ obj/
 
 # Ignore les fichiers générés par Visual Studio
 .vscode/
-../.idea/
+.idea/
 *.user
 *.suo
 *.ncb
