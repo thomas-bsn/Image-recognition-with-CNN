@@ -38,7 +38,7 @@ public class ImageLoader
     
     private bool IsValidFormat(String path)
     {
-        String[] validExtensions = { ".jpg", ".jpeg", ".png" };
+        String[] validExtensions = { ".jpg", ".jpeg", ".png", ".bmp" };
         return validExtensions.Contains(Path.GetExtension(path));
     }
     
