@@ -8,11 +8,11 @@ if (args.Length == 0)
     return;
 }
 
-string imagePath = args[0];
+string path = args[0];
 
 // Appel du modules de traitement d'image
-var loader = new ImageLoader(imagePath);
-loader.PrettyPrintMatrix();
-var image = loader.GetImage();
+var loader = new ImageLoader(path);
+var image = loader.ProcessImage();
+
 
 // Appel du CNN

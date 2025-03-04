@@ -1,102 +1,40 @@
 ﻿using System.Drawing;
-using System.Drawing.Imaging;
+using System.Drawing.Drawing2D;
 
 namespace CNN.ImageProcessing;
 
 public class ImageLoader
 {
-    private static int _width = 224;
-    private static int _height = 224;
-    private float[,,] _image;
     private string _imageName;
-    
+    private Bitmap _image;
+
     public ImageLoader(string path)
     {
         if (!File.Exists(path))
-        {
-            Console.WriteLine($"Fichier introuvable : {Path.GetFullPath(path)}");
-            return;
-        }
-        if (IsValidFormat(path))
-        {
-            Console.WriteLine($"Chargement de l'image : {path}");
-            using (var loadedImage = new Bitmap(path))
-            {
-                _imageName = Path.GetFileNameWithoutExtension(path);
+            throw new FileNotFoundException($"Fichier introuvable : {Path.GetFullPath(path)}");
 
-                using (var rgbImage = ConvertToRgb(loadedImage))
-                using (var resizedImage = PictureResize(rgbImage))
-                    _image = PixelNormalisation(resizedImage);
-            }
-            Console.WriteLine($"Image chargée : {Path.GetFileName(path)}");
-        }
-        else
-        {
+        if (!IsValidFormat(path))
             throw new ArgumentException("Le format de l'image n'est pas valide.");
-        }
-    }
-    
-    private bool IsValidFormat(String path)
-    {
-        String[] validExtensions = { ".jpg", ".jpeg", ".png", ".bmp" };
-        return validExtensions.Contains(Path.GetExtension(path));
-    }
-    
-    private Bitmap ConvertToRgb(Bitmap image)
-    {
-        if (image.PixelFormat != PixelFormat.Format24bppRgb) // Si l'image n'est pas en RGB
-        {
-            var newImage = new Bitmap(image.Width, image.Height, PixelFormat.Format24bppRgb);
-            using (Graphics g = Graphics.FromImage(newImage))
-            {
-                g.DrawImage(image, 0, 0);
-            }
-            return newImage;
-        }
-        return image;
+
+        Console.WriteLine($"Chargement de l'image : {path}");
+        _image = new Bitmap(path);
+        _imageName = Path.GetFileNameWithoutExtension(path);
     }
 
-    private Bitmap PictureResize(Bitmap image)
+    private bool IsValidFormat(string path)
     {
-        image = new Bitmap(image, new Size(_width, _height));
-        return image;
-    }
-    
-    private float[,,] PixelNormalisation(Bitmap image)
-    {
-        var imageArray = new float[_width, _height, 3];
-        for (int i = 0; i < _width; i++)
-        {
-            for (int j = 0; j < _height; j++)
-            {
-                Color pixel = image.GetPixel(i, j);
-                imageArray[i, j, 0] = pixel.R / 255.0f;
-                imageArray[i, j, 1] = pixel.G / 255.0f;
-                imageArray[i, j, 2] = pixel.B / 255.0f;
-            }
-        }
-        return imageArray;
+        string[] validExtensions = { ".jpg", ".jpeg", ".png", ".bmp" };
+        return validExtensions.Contains(Path.GetExtension(path).ToLowerInvariant());
     }
 
-    public void PrettyPrintMatrix()
+    public float[,,] ProcessImage()
     {
-        // Ecrit dans un fichier d'ouput la matrice de l'image
-        using (StreamWriter file = new StreamWriter(_imageName + ".txt"))
+        using (var rgbImage = Preprocessor.ConvertToRgb(_image))
+        using (var resizedImage = Preprocessor.Resize(rgbImage))
         {
-            for (int i = 0; i < _width; i++)
-            {
-                for (int j = 0; j < _height; j++)
-                {
-                    file.Write($"[{_image[i, j, 0]}, {_image[i, j, 1]}, {_image[i, j, 2]}] ");
-                }
-                file.WriteLine();
-            }
+            var matrix = Preprocessor.Normalize(resizedImage);
+            Console.WriteLine($"Matrice crée pour l'image : {_imageName}");
+            return matrix;
         }
     }
-    
-    public float[,,] GetImage()
-    {
-        return _image;
-    }
-
 }
