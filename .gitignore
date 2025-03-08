@@ -5,6 +5,7 @@ CNN/Layers/Convolution/DataFilters/*.filter
 .idea/
 
 *.nuget/
+*.user
 packages/
 project.lock.json
 project.assets.json
