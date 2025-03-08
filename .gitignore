@@ -1,6 +1,6 @@
 bin/
 obj/
-CNN/Layers/Convolution/DataFilters/*.filter
+*.filter
 
 .idea/
 
