@@ -57,5 +57,19 @@ namespace Image_recognition_with_CNN.CNN.Layers
             Console.WriteLine($"{layers.Count} ConvolutionalLayers créées.");
             return layers;
         }
+        
+        public List<PoolingLayer> CreatePoolingLayers(int n)
+        {
+            List<PoolingLayer> layers = new List<PoolingLayer>();
+
+            for (int i = 0; i < n; i++)
+            {
+                layers.Add(new PoolingLayer());
+            }
+
+            Console.WriteLine($"{layers.Count} PoolingLayers créées.");
+            return layers;
+            
+        }
     }
 }

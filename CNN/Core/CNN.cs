@@ -6,11 +6,11 @@ namespace Image_recognition_with_CNN.CNN;
 public class Cnn
 {
     private readonly List<ConvolutionalLayer> _convolutionalLayers;
-    private readonly List<FullyConnectedLayer> _fullyConnectedLayers;
     private readonly List<PoolingLayer> _poolingLayers;
+    private readonly List<FullyConnectedLayer> _fullyConnectedLayers;
     
-    public Cnn(List<ConvolutionalLayer> convolutionalLayers, 
-        List<FullyConnectedLayer> fullyConnectedLayers, List<PoolingLayer> poolingLayers)
+    public Cnn(List<ConvolutionalLayer> convolutionalLayers, List<PoolingLayer> poolingLayers, 
+        List<FullyConnectedLayer> fullyConnectedLayers)
     {
         _convolutionalLayers = convolutionalLayers;
         _fullyConnectedLayers = fullyConnectedLayers;
@@ -26,7 +26,11 @@ public class Cnn
             CC = convolutionalLayer.ForwardPropagation(CC);
         }
         
-        // TODO: Implement pooling layers
+        foreach (var poolingLayer in _poolingLayers)
+        {
+            CC = poolingLayer.ForwardPropagation(CC);
+        }
+        
         // TODO: Implement fully connected layers
         
         // List<float> result = new List<float> { 1.5f, 2.3f, -0.7f };

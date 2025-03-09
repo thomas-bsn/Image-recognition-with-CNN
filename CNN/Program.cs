@@ -29,7 +29,9 @@ if (!File.Exists(configPath))
 // On setup les layers
 var LF = new LayerFactory();
 var CL = LF.CreateConvolutionalLayers(filtersPath, configPath);
+var PL = LF.CreatePoolingLayers(1);
 
-var cnn = new Cnn(CL, null, null);
+
+var cnn = new Cnn(CL, PL, null);
 
 Console.WriteLine("C'est bon, ça a marché !");
